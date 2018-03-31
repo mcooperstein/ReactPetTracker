@@ -16,6 +16,9 @@ import PropTypes from 'prop-types';
 import { PasswordForgetForm } from './PasswordForget';
 import PasswordChangeForm from './PasswordChange';
 import { firebase } from '../firebase';
+import { withRouter } from 'react-router-dom';
+import withAuthorization from './withAuthorization';
+
 /*
 const AccountPage = (props, { authUser }) =>
 <div>
@@ -32,7 +35,12 @@ AccountPage.contextTypes = {
   authUser: PropTypes.object,
 };
 */
-class AccountPage extends Component {
+const AccountPage = ({ history }) =>
+  <div>
+      <Account history={history}/>
+  </div>
+
+class Account extends Component {
   constructor(props) {
     super(props);
 
@@ -74,4 +82,8 @@ AccountPage.contextTypes = {
   authUser: PropTypes.object,
 };
 */
-export default AccountPage;
+const authCondition = (authUser) => !!authUser;
+
+//export default withRouter(AccountPage);
+
+export default withAuthorization(authCondition)(AccountPage);
