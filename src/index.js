@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 
 import App from './components/app';
 import reducers from './reducers';
@@ -20,6 +20,7 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
+      <Switch>
       <Route path="/how-it-works" component={Howitworks} />
       <Route path="/add-pet-profile" component={Addpetprofile} />
       <Route path="/your-pets/medical-record/:id" component={Medicalrecord} />
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route path="/your-pets/appointments/:id" component={Appointments} />
       <Route path="/your-pets" component={Yourpets} />
       <Route path="/" component={Home} />
+    </Switch>
     </BrowserRouter>
   </Provider>
   , document.querySelector('.container'));
