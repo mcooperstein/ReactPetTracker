@@ -41,12 +41,16 @@ class AccountPage extends Component {
     };
   }
 
-  componentDidMount() {
+  accountupdate()
+  {
     firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
     });
+  }
+  componentDidMount() {
+      this.accountupdate();
   }
     render()
     {
@@ -56,6 +60,7 @@ class AccountPage extends Component {
               <div>
                   <h1>Account: {this.state.authUser.email}</h1>
                   <PasswordForgetForm />
+                  <hr/>
                   <PasswordChangeForm />
               </div>
               : <div> Loading... </div>
@@ -64,8 +69,9 @@ class AccountPage extends Component {
       );
     }
 }
-
+/*
 AccountPage.contextTypes = {
   authUser: PropTypes.object,
 };
+*/
 export default AccountPage;
