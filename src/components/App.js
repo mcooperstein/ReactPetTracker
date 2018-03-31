@@ -11,7 +11,7 @@ import Appointments from './Appointments.jsx';
 import Yourpets from './Yourpets.jsx';
 import Home from './Home.jsx';
 import Navigation from './Navigation';
-import Account from './Account';
+import AccountPage from './Account';
 import SignInPage from './Signin';
 import SignUpPage from './Signup';
 
@@ -25,13 +25,15 @@ class App extends Component {
       authUser: null,
     };
   }
-  
+
   componentDidMount() {
     firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
     });
+
+  
   }
 
   render() {
@@ -46,7 +48,7 @@ class App extends Component {
             <Route path="/your-pets/daily-log/:id" component={Dailylog} />
             <Route path="/your-pets/appointments/:id" component={Appointments} />
             <Route path="/your-pets" component={Yourpets} />
-            <Route path="/account" component={Account} />
+            <Route path="/account" component={AccountPage} authUser={this.state.authUser} />
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
             <Route path="/" component={Home} />
