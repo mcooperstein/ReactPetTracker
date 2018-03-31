@@ -16,7 +16,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 
-const SignUpPage = () =>
+const SignUpPage = ({history}) =>
   <div>
     <h1>SignUp</h1>
     <SignUpForm history={history} />
@@ -38,13 +38,7 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-        username: '',
-        email: '',
-        passwordOne: '',
-        passwordTwo: '',
-        error: null, };
-
+    this.state = {...INITIAL_STATE};
   }
 
   onSubmit = (event) => {
