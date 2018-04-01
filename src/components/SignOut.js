@@ -7,12 +7,12 @@ class SignOutButton extends Component{
     return(
       <div>
         <button type="button" onClick={auth.doSignOut}>
+          {/* <button type="button" onClick={this.setState(() => ({ authUser: null }))}> */}
           <Link to="/">Sign Out</Link>
         </button>
       </div>
     )
   }
 }
-
 
 export default SignOutButton;

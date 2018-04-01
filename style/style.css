@@ -1,10 +1,15 @@
 #home-container {
   margin: 20px 0;
-  display:flex;
+  display:grid;
+  grid-template-columns: repeat(10,1fr);
 }
 
 #homepage-header {
   text-align: center;
+}
+
+#home-container #center {
+  grid-column: span 8;
 }
 
 #pet-collage {

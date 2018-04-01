@@ -47,8 +47,9 @@ export default class Home extends Component {
     return (
       <div>
         <div id="home-container">
-          <h1 id="homepage-header">Welcome to Pet Tracker</h1>
-          <button className="btn btn-primary" onClick={this.openModal}>How it Works</button>
+          <div id="left"></div>
+          <div id="center"><h1 id="homepage-header">Welcome to Pet Tracker</h1></div>
+          <div id="right"><button className="btn btn-info" onClick={this.openModal}>How it Works</button></div>
         </div>
         <Modal
           isOpen={this.state.modalIsOpen}
