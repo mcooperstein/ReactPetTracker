@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import { db } from '../firebase';
 import Modal from 'react-modal';
 
@@ -60,7 +61,7 @@ export default class Home extends Component {
           id="how-it-works-modal"
         >
           <h2 ref={subtitle => this.subtitle = subtitle}>How it Works:</h2>
-          <div>I am a modal</div>
+          <Link className="nav-link" to="/sign-up">Sign up Today!</Link>
           <button id="modal-close" className="btn btn-secondary btn-sm" onClick={this.closeModal}>close</button>
         </Modal>
         <img id="pet-collage" src="../../images/animalCollage.jpg"/>
