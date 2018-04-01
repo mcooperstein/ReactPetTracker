@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 
-
-import Howitworks from './Howitworks.jsx';
 import Addpetprofile from './Addpetprofile.jsx';
 import Medicalrecord from './Medicalrecord.jsx';
 import Dailylog from './Dailylog.jsx';
@@ -32,8 +30,6 @@ class App extends Component {
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
     });
-
-  
   }
 
   render() {
@@ -42,7 +38,6 @@ class App extends Component {
           <div>
           <Navigation authUser={this.state.authUser}  />
           <Switch>
-            <Route path="/how-it-works" component={Howitworks} />
             <Route path="/add-pet-profile" component={Addpetprofile} />
             <Route path="/your-pets/medical-record/:id" component={Medicalrecord} />
             <Route path="/your-pets/daily-log/:id" component={Dailylog} />

@@ -1,0 +1,23 @@
+#home-container {
+  margin: 20px 0;
+  display:flex;
+}
+
+#homepage-header {
+  text-align: center;
+}
+
+#pet-collage {
+  display:block;
+  margin:auto;
+}
+
+/* Modal CSS */
+div.ReactModal__Content.ReactModal__Content--after-open {
+  width:70%;
+}
+
+#modal-close {
+  margin-top: 10px;
+}
+/* --------- */
