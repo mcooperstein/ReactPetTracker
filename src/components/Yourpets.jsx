@@ -37,12 +37,12 @@ const Petlist = ({ pets }) =>
     <div className="card-deck">
     {pets ?
     Object.keys(pets).map(key =>
-      <div className="card" style={{ maxWidth: "300px"}}>
+      <div className="card" style={{ maxWidth: "300px"}} key={pets[key].petname}>
   <img className="card-img-top" src={pets[key].img} alt="Card image cap"/>
   <div className="card-body">
     <h5 className="card-title">{pets[key].petname}</h5>
     <p className="card-text">{pets[key].dob}</p>
-    <Link className="btn btn-primary" to={`/pets/${pets[key].petname}`}>{pets[key].petname} Profile</Link>
+    <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
   </div>
 </div>) : <div>No pets :(</div> }
     </div>

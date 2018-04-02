@@ -1,44 +1,43 @@
 import React, { Component } from 'react';
-
-import withAuthorization from './withAuthorization';
 import { db,auth,firebase } from '../firebase';
+import withAuthorization from './withAuthorization';
+import {Link} from 'react-router-dom';
 
-class Test extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      users: null,
-      user: null
-    };
+export default class Topic extends Component {
+  constructor(props)
+  {
+      super(props);
+
+      this.state = {pet: []}
+      console.log(this.props);
+      console.log(this.props.match);
   }
-
-  componentDidMount() {
-    /*
-    db.onceGetUsers().then(snapshot =>
-      this.setState(() => ({ users: snapshot.val() }))
-    );
-    */
-    firebase.auth.onAuthStateChanged(function(user) {
+  componentDidMount()
+  {
+    firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
-        console.log(user);
+        // db.yourPets(user["uid"]).then(snapshot =>
+        //   console.log(snapshot.val())
+        // )
+
+        db.getPet(user["uid"], this.props.match.params.name).then(snapshot =>
+          // console.log(snapshot.val())
+          this.setState(() => ({ pet: snapshot.val() }))
+        );
+
       } else {
-        // No user is signed in.
       }
     })
   }
-
   render() {
+
     return (
       <div>
-        <h1>Home</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
-        { this.state.user }
+          <p>{this.state.pet["petname"]}</p>
+          <p>{this.state.pet["dob"]}</p>
+          <p>{this.state.pet["img"]}</p>
       </div>
     );
   }
 }
-
-const authCondition = (authUser) => !!authUser;
-
-export default withAuthorization(authCondition)(Test);

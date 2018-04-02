@@ -20,3 +20,6 @@ export const addPetprofile = (id, petname, dob, img) =>
 
 export const yourPets = (id) =>
   db.ref(`users/${id}/pets`).once('value');
+
+export const getPet = (id, url) =>
+  db.ref(`users/${id}/pets/${url}`).once('value');

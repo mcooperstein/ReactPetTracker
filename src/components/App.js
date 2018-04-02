@@ -13,7 +13,7 @@ import Navigation from './Navigation';
 import AccountPage from './Account';
 import SignInPage from './Signin';
 import SignUpPage from './Signup';
-import Test from './Test';
+import Topic from './Test';
 import Editpetprofile from './Editpetprofile';
 import Petprofile from './Petprofile';
 import { firebase } from '../firebase';
@@ -26,15 +26,15 @@ const App = () => {
           <Switch>
             <Route path="/add-pet-profile" component={Addpetprofile} />
             <Route path="/edit-pet-profile" component={Editpetprofile} />
-            <Route path="/pets/:id" component={Petprofile} />
-            <Route path="/your-pets/medical-record/:id" component={Medicalrecord} />
-            <Route path="/your-pets/daily-log/:id" component={Dailylog} />
-            <Route path="/your-pets/appointments/:id" component={Appointments} />
+            <Route path="/pets/:name" component={Petprofile} />
+            <Route path="/your-pets/medical-record/:name" component={Medicalrecord} />
+            <Route path="/your-pets/daily-log/:name" component={Dailylog} />
+            <Route path="/your-pets/appointments/:name" component={Appointments} />
             <Route path="/your-pets" component={Yourpets} />
             <Route path="/account" component={AccountPage}/>
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
-            <Route path="/test" component={Test} />
+            <Route path="/test/:name" component={Topic} />
             <Route path="/" component={Home} />
         </Switch>
         </div>

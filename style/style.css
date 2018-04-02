@@ -91,3 +91,8 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 }
 
 /* ---------------- */
+
+#pet-profile-header {
+  text-align:center;
+  margin: 20px 0;
+}
