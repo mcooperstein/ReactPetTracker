@@ -12,6 +12,8 @@ import Navigation from './Navigation';
 import AccountPage from './Account';
 import SignInPage from './Signin';
 import SignUpPage from './Signup';
+import Test from './Test';
+
 
 import { firebase } from '../firebase';
 
@@ -46,6 +48,7 @@ class App extends Component {
             <Route path="/account" component={AccountPage} authUser={this.state.authUser} />
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
+            <Route path="/test" component={Test} />
             <Route path="/" component={Home} />
         </Switch>
         </div>
