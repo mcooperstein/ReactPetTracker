@@ -26,3 +26,68 @@ div.ReactModal__Content.ReactModal__Content--after-open {
   margin-top: 10px;
 }
 /* --------- */
+
+/* Sign In Page CSS */
+
+#sign-in-header {
+  margin:25px 0;
+  text-align: center;
+}
+
+#sign-in-form {
+  width: 50%;
+  margin: auto;
+  padding: 25px 25px 0px 25px;
+  background-color: rgba(220,220,220,0.8);
+  border-radius: 5px;
+}
+
+.control-label {
+  margin: 5px;
+  font-weight: bolder;
+}
+
+#sign-in-button {
+  margin-top: 20px;
+  /* cursor:pointer; */
+}
+
+/* #sign-in-button:hover {
+  background-color:#009bff;
+  border-color:#009bff;
+} */
+
+#sign-in-footer {
+  margin-top:20px;
+  display:flex;
+  justify-content: space-between;
+}
+
+/* ---------------- */
+
+/* Sign Up Page CSS */
+
+#sign-up-header {
+  margin:25px 0;
+  text-align: center;
+}
+
+#sign-up-form {
+  width: 50%;
+  margin: auto;
+  padding: 25px 25px 10px 25px;
+  background-color: rgba(220,220,220,0.8);
+  border-radius: 5px;
+}
+
+#sign-up-button {
+  margin: 20px 0;
+  cursor:pointer;
+}
+
+#sign-up-button:hover {
+  background-color:#009bff;
+  border-color:#009bff;
+}
+
+/* ---------------- */

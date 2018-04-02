@@ -19,7 +19,7 @@ import {
 
 const SignUpPage = ({history}) =>
   <div>
-    <h1>SignUp</h1>
+    <h1 id="sign-up-header">Sign Up Today!</h1>
     <SignUpForm history={history} />
   </div>
 
@@ -90,35 +90,45 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+        <div className="form-group" id="sign-up-form">
+          <label className="control-label">Name</label>
         <input
+          className="form-control"
           value={username}
           onChange={event => this.setState(byPropKey('username', event.target.value))}
           type="text"
           placeholder="Full Name"
         />
+        <label className="control-label">Email</label>
         <input
+          className="form-control"
           value={email}
           onChange={event => this.setState(byPropKey('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
+        <label className="control-label">Create Password</label>
         <input
+          className="form-control"
           value={passwordOne}
           onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
           type="password"
           placeholder="Password"
         />
+        <label className="control-label">Confirm Password</label>
         <input
+          className="form-control"
           value={passwordTwo}
           onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button id="sign-up-button" disabled={isInvalid} type="submit" className="btn btn-primary btn-block">
           Sign Up
         </button>
 
         { error && <p>{error.message}</p> }
+      </div>
       </form>
     );
   }

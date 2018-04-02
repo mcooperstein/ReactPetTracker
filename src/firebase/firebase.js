@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
 const config = {
-    apiKey: "AIzaSyCaNg0y_5YbU974_1MF1iN4L5GDdeDR7hM",
-    authDomain: "pettracker-758d8.firebaseapp.com",
-    databaseURL: "https://pettracker-758d8.firebaseio.com",
-    projectId: "pettracker-758d8",
-    storageBucket: "pettracker-758d8.appspot.com",
-    messagingSenderId: "948100936737"
+    apiKey: "AIzaSyCQiMpNKku8GXFDti_HxhySKfSfy_sI5Ls",
+    authDomain: "pet-tracker-f5647.firebaseapp.com",
+    databaseURL: "https://pet-tracker-f5647.firebaseio.com",
+    projectId: "pet-tracker-f5647",
+    storageBucket: "",
+    messagingSenderId: "835618976247"
   };
   if (!firebase.apps.length) {
     firebase.initializeApp(config);

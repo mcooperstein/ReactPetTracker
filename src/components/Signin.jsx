@@ -19,11 +19,9 @@ import { auth } from '../firebase';
 import { PasswordForgetLink } from './PasswordForget';
 
 const SignInPage = ({ history }) =>
-  <div>
-    <h1>SignIn</h1>
+  <div className="form-group">
+    <h1 id="sign-in-header">Sign In</h1>
     <SignInForm history={history} />
-    <PasswordForgetLink />
-    <SignUpLink />
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -78,23 +76,33 @@ class SignInForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+        <div className="form-group" id="sign-in-form">
+        <label className="control-label">Email Address</label>
         <input
+          className="form-control"
           value={email}
           onChange={event => this.setState(byPropKey('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
+        <label className="control-label">Password</label>
         <input
+          className="form-control"
           value={password}
           onChange={event => this.setState(byPropKey('password', event.target.value))}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button id="sign-in-button" disabled={isInvalid} type="submit" className="btn btn-primary btn-block">
           Sign In
         </button>
 
         { error && <p>{error.message}</p> }
+        <div id="sign-in-footer">
+          <PasswordForgetLink />
+          <SignUpLink />
+        </div>
+        </div>
       </form>
     );
   }
