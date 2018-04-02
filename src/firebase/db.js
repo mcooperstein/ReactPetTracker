@@ -23,3 +23,12 @@ export const yourPets = (id) =>
 
 export const getPet = (id, url) =>
   db.ref(`users/${id}/pets/${url}`).once('value');
+
+export const getPetDailyLog = (id, url) =>
+  db.ref(`users/${id}/pets/${url}/daily-log`).once('value');
+
+export const addDailyLog = (id, url, time, content) =>
+    db.ref(`users/${id}/pets/${url}/daily-log`).push({
+      time,
+      content
+});

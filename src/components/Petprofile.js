@@ -31,7 +31,7 @@ export default class Petprofile extends Component {
       return (
         <div>
             <h1 id="pet-profile-header">{this.state.pet["petname"]}</h1>
-            <Dailylog />
+            <Dailylog id={this.props.match.params.id} petName={this.state.pet["petname"]}/>
         </div>
       );
     }
