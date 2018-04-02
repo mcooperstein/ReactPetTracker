@@ -15,7 +15,7 @@ import SignInPage from './Signin';
 import SignUpPage from './Signup';
 import Test from './Test';
 import Editpetprofile from './Editpetprofile';
-
+import Petprofile from './Petprofile';
 import { firebase } from '../firebase';
 
 const App = () => {
@@ -26,6 +26,7 @@ const App = () => {
           <Switch>
             <Route path="/add-pet-profile" component={Addpetprofile} />
             <Route path="/edit-pet-profile" component={Editpetprofile} />
+            <Route path="/pets/:id" component={Petprofile} />
             <Route path="/your-pets/medical-record/:id" component={Medicalrecord} />
             <Route path="/your-pets/daily-log/:id" component={Dailylog} />
             <Route path="/your-pets/appointments/:id" component={Appointments} />

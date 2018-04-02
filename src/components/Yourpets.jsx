@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { db,auth,firebase } from '../firebase';
 import withAuthorization from './withAuthorization';
+import {Link} from 'react-router-dom';
 
 class Yourpets extends Component {
   constructor(props)
@@ -33,10 +34,18 @@ class Yourpets extends Component {
 const Petlist = ({ pets }) =>
   <div>
     <h2>List of your pets </h2>
+    <div className="card-deck">
     {pets ?
     Object.keys(pets).map(key =>
-      <div key={key}>{pets[key].petname}</div>
-    ) : <div>No pets :(</div> }
+      <div className="card" style={{ maxWidth: "300px"}}>
+  <img className="card-img-top" src={pets[key].img} alt="Card image cap"/>
+  <div className="card-body">
+    <h5 className="card-title">{pets[key].petname}</h5>
+    <p className="card-text">{pets[key].dob}</p>
+    <Link className="btn btn-primary" to={`/pets/${pets[key].petname}`}>{pets[key].petname} Profile</Link>
+  </div>
+</div>) : <div>No pets :(</div> }
+    </div>
   </div>
 
   const authCondition = (authUser) => !!authUser;
