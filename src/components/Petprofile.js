@@ -17,7 +17,7 @@ export default class Petprofile extends Component {
     {
       firebase.auth.onAuthStateChanged((user)=> {
         if (user) {
-          db.getPet(user["uid"], this.props.match.params.name).then(snapshot =>
+          db.getPet(user["uid"], this.props.match.params.id).then(snapshot =>
             // console.log(snapshot.val())
             this.setState(() => ({ pet: snapshot.val() }))
           );
