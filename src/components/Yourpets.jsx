@@ -33,10 +33,10 @@ class Yourpets extends Component {
 const Petlist = ({ pets }) =>
   <div>
     <h2>List of your pets </h2>
-
-    {Object.keys(pets).map(key =>
+    {pets ?
+    Object.keys(pets).map(key =>
       <div key={key}>{pets[key].petname}</div>
-    )}
+    ) : <div>No pets :(</div> }
   </div>
 
   const authCondition = (authUser) => !!authUser;
