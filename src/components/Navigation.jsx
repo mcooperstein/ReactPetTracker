@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import SignOutButton from './SignOut';
 
-const Navigation = ({ authUser }) =>
+const Navigation = (props, { authUser }) =>
   <div>
     { authUser
         ? <NavigationAuth />
       : <NavigationGuest />
     }
   </div>
+Navigation.contextTypes = {
+  authUser: PropTypes.object,
+};
 class NavigationGuest extends Component {
   render(){
     return(
@@ -46,6 +50,15 @@ class NavigationAuth extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/account">Account</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/your-pets">Your Pets</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/add-pet-profile">Create Pet Profile</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/edit-pet-profile">Edit Pet Profile</Link>
             </li>
             <li className="nav-item">
               <SignOutButton />

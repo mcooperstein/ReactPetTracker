@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import withAuthentication from './withAuthentication';
 
 import Addpetprofile from './Addpetprofile.jsx';
 import Medicalrecord from './Medicalrecord.jsx';
@@ -13,39 +14,23 @@ import AccountPage from './Account';
 import SignInPage from './Signin';
 import SignUpPage from './Signup';
 import Test from './Test';
-
+import Editpetprofile from './Editpetprofile';
 
 import { firebase } from '../firebase';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      authUser: null,
-    };
-  }
-
-  componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
-    });
-  }
-
-  render() {
+const App = () => {
     return (
       <BrowserRouter>
           <div>
-          <Navigation authUser={this.state.authUser}  />
+          <Navigation />
           <Switch>
             <Route path="/add-pet-profile" component={Addpetprofile} />
+            <Route path="/edit-pet-profile" component={Editpetprofile} />
             <Route path="/your-pets/medical-record/:id" component={Medicalrecord} />
             <Route path="/your-pets/daily-log/:id" component={Dailylog} />
             <Route path="/your-pets/appointments/:id" component={Appointments} />
             <Route path="/your-pets" component={Yourpets} />
-            <Route path="/account" component={AccountPage} authUser={this.state.authUser} />
+            <Route path="/account" component={AccountPage}/>
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
             <Route path="/test" component={Test} />
@@ -54,7 +39,6 @@ class App extends Component {
         </div>
       </BrowserRouter>
     );
-  }
 }
 
-export default App;
+export default withAuthentication(App);

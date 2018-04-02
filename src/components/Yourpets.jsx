@@ -11,11 +11,11 @@ class Yourpets extends Component {
   }
   componentDidMount()
   {
-    firebase.auth.onAuthStateChanged(function(user) {
+    firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
         db.yourPets(user["uid"]).then(snapshot =>
-          console.log(snapshot.val())
-          //this.setState(() => ({ pets: snapshot.val() }))
+          // console.log(snapshot.val())
+          this.setState(() => ({ pets: snapshot.val() }))
         );
       } else {
       }

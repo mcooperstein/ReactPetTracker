@@ -55,12 +55,13 @@ class Addpetpage extends Component {
         this.setState(byPropKey('error', error));
       });
       */
-      firebase.auth.onAuthStateChanged(function(user) {
+      firebase.auth.onAuthStateChanged((user)=> {
         if (user) {
           console.log(user["uid"], petname);
           db.addPetprofile(user["uid"], petname, dob, img)
           .then(() => {
-            // this.setState(() => ({ ...INITIAL_STATE }));
+            this.setState(() => ({ ...INITIAL_STATE }));
+            //this.setState({...INITIAL_STATE})
             history.push("/your-pets")
           })
 
