@@ -31,7 +31,7 @@ class Yourpets extends Component {
     );
   }
 }
-const Petlist = ({ pets }) =>
+export const Petlist = ({ pets }) =>
   <div>
     <h2>List of your pets </h2>
     <div className="card-deck">

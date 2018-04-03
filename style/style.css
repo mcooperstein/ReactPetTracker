@@ -92,6 +92,28 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 
 /* ---------------- */
 
+/* Forgot Password and Change Form Page */
+
+#pw-forget-header, #pw-change-header {
+  margin:25px 0;
+  text-align: center;
+}
+
+#pw-forget-form, #pw-change-form {
+  width: 50%;
+  margin: auto;
+  padding: 25px 25px 10px 25px;
+  background-color: rgba(220,220,220,0.8);
+  border-radius: 5px;
+}
+
+#pw-forget-button, #pw-change-button {
+  margin-top: 20px;
+}
+
+/* ----------------- */
+
+
 #pet-profile-header {
   text-align:center;
   margin: 20px 0;

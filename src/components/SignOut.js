@@ -6,7 +6,7 @@ class SignOutButton extends Component{
   render(){
     return(
       <div>
-        <button type="button" onClick={auth.doSignOut}>
+        <button className="btn btn-warning" onClick={auth.doSignOut}>
           {/* <button type="button" onClick={this.setState(() => ({ authUser: null }))}> */}
           <Link to="/">Sign Out</Link>
         </button>

@@ -1,22 +1,9 @@
-/*
-import React, { Component } from 'react';
-
-export default class Account extends Component {
-  render() {
-    return (
-      <div>Your Account</div>
-    );
-  }
-}
-
-*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { PasswordForgetForm } from './PasswordForget';
 import PasswordChangeForm from './PasswordChange';
-import { firebase } from '../firebase';
+import { firebase, db, auth } from '../firebase';
 import { withRouter } from 'react-router-dom';
+import { Petlist } from './Yourpets';
 import withAuthorization from './withAuthorization';
 
 /*
@@ -35,12 +22,12 @@ AccountPage.contextTypes = {
   authUser: PropTypes.object,
 };
 */
-const AccountPage = ({ history }) =>
-  <div>
-      <Account history={history}/>
-  </div>
+// const Account = ({ history }) =>
+//   <div>
+//       <Account history={history}/>
+//   </div>
 
-class Account extends Component {
+class AccountPage extends Component {
   constructor(props) {
     super(props);
 
@@ -49,7 +36,7 @@ class Account extends Component {
     };
   }
 
-  accountupdate()
+  accountUpdate()
   {
     firebase.auth.onAuthStateChanged(authUser => {
       authUser
@@ -58,7 +45,7 @@ class Account extends Component {
     });
   }
   componentDidMount() {
-      this.accountupdate();
+      this.accountUpdate();
   }
     render()
     {
@@ -66,9 +53,8 @@ class Account extends Component {
         <div>
           { this.state.authUser ?
               <div>
-                  <h1>Account: {this.state.authUser.email}</h1>
-                  <PasswordForgetForm />
-                  <hr/>
+                  <h4>Account Username: {this.state.authUser.email}</h4>
+                  <h6>Number of Pets: (WANT TO DISPLAY THIS INFO)</h6>
                   <PasswordChangeForm />
               </div>
               : <div> Loading... </div>

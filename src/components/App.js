@@ -16,6 +16,7 @@ import SignUpPage from './Signup';
 import Topic from './Test';
 import Editpetprofile from './Editpetprofile';
 import Petprofile from './Petprofile';
+import PasswordForgetPage from './PasswordForget';
 import { firebase } from '../firebase';
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/account" component={AccountPage}/>
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
+            <Route path="/pw-forget" component={PasswordForgetPage} />
             <Route path="/test/:name" component={Topic} />
             <Route path="/" component={Home} />
         </Switch>

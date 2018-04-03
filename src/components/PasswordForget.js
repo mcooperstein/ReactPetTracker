@@ -5,7 +5,7 @@ import { auth } from '../firebase';
 
 const PasswordForgetPage = () =>
   <div>
-    <h1>PasswordForget</h1>
+    <h1 id="pw-forget-header">Forgot Your Password?</h1>
     <PasswordForgetForm />
   </div>
 
@@ -49,17 +49,21 @@ class PasswordForgetForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+        <div className="form-group" id="pw-forget-form">
+        <label className="control-label">Email to send password</label>
         <input
+          className="form-control"
           value={this.state.email}
           onChange={event => this.setState(byPropKey('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
-        <button disabled={isInvalid} type="submit">
-          Forget My Password
+        <button disabled={isInvalid} type="submit" id="pw-forget-button" className="btn btn-primary btn-block">
+          Recover Password
         </button>
 
         { error && <p>{error.message}</p> }
+      </div>
       </form>
     );
   }
