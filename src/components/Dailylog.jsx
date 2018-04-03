@@ -23,7 +23,7 @@ export default class Dailylog extends Component {
     getLogs = () => {
       firebase.auth.onAuthStateChanged((user)=> {
         if (user) {
-          db.getPet(user["uid"], this.props.id).then(snapshot =>
+          db.getPetDailyLog(user["uid"], this.props.id).then(snapshot =>
             // console.log(snapshot.val())
             this.setState(() => ({ dailyLog: snapshot.val() }))
           );
@@ -88,8 +88,8 @@ export default class Dailylog extends Component {
 
   const PetDailyLogs = ({ dailyLog, petName }) =>
     <div>
-      {dailyLog.length>0 ?
+      {dailyLog ?
       Object.keys(dailyLog).map(key =>
-        <div className="card" style={{ maxWidth: "300px"}} key={dailyLog[key]}>
-    {dailyLog[key].content}</div>) : <div>Nothing for {petName} today :(</div> }
+        <div className="card" style={{ maxWidth: "300px"}} key={dailyLog[key].content}>
+    {dailyLog[key].content} @ {dailyLog[key].time}</div>) : <div>Nothing for {petName} today :(</div> }
     </div>

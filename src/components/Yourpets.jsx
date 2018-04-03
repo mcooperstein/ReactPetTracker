@@ -41,7 +41,7 @@ const Petlist = ({ pets }) =>
   <img className="card-img-top" src={pets[key].img} alt="Card image cap"/>
   <div className="card-body">
     <h5 className="card-title">{pets[key].petname}</h5>
-    <p className="card-text">{pets[key].dob}</p>
+    <p className="card-text">Date of Birth: {pets[key].dob}</p>
     <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
   </div>
 </div>) : <div>No pets :(</div> }
