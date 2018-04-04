@@ -26,7 +26,6 @@ class Addpetpage extends Component {
 
     this.state = {...INITIAL_STATE};
   }
-
   onSubmit = (event) => {
     const {
       petname,
@@ -55,23 +54,32 @@ class Addpetpage extends Component {
         this.setState(byPropKey('error', error));
       });
       */
-      firebase.auth.onAuthStateChanged((user)=> {
-        if (user) {
-          console.log(user["uid"], petname);
-          db.addPetprofile(user["uid"], petname, dob, img)
-          .then(() => {
-            this.setState(() => ({ ...INITIAL_STATE }));
-            //this.setState({...INITIAL_STATE})
-            history.push("/your-pets")
-          })
+      const ref = firebase.storage.ref();
+      const file = document.querySelector('#photo').files[0];
+      const name = (+new Date()) + '-' + file.name;
+      const metadata = { contentType: file.type };
+      const task = ref.child(name).put(file, metadata);
 
-          .catch(error => {
-            this.setState(byPropKey('error', error));
-          });
+      task.then((snapshot) => {
+        firebase.auth.onAuthStateChanged((user)=> {
+          if (user) {
+            console.log(user["uid"], petname);
+            db.addPetprofile(user["uid"], petname, dob, snapshot.downloadURL)
+            .then(() => {
+              this.setState(() => ({ ...INITIAL_STATE }));
+              //this.setState({...INITIAL_STATE})
+              history.push("/your-pets")
+            })
 
-        } else {
-        }
-      })
+            .catch(error => {
+              this.setState(byPropKey('error', error));
+            });
+
+          } else {
+          }
+        })
+      });
+
     event.preventDefault();
   }
   render() {
@@ -95,7 +103,7 @@ class Addpetpage extends Component {
           type="text"
           placeholder="Date of birth"
         />
-
+      {/*
       <label className="control-label">Upload image</label>
         <input
           className="form-control"
@@ -103,11 +111,12 @@ class Addpetpage extends Component {
           onChange={event => this.setState(byPropKey('img', event.target.value))}
           type="text"
         />
+      */}
+      <input type="file" id="photo" />
       <img src={ this.state.img } />
         <button id="sign-up-button" type="submit" className="btn btn-primary btn-block">
           Add Pet
         </button>
-
         { this.state.error && <p>{this.state.error.message}</p> }
       </div>
       </form>

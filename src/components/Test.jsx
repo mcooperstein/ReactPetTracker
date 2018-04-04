@@ -4,40 +4,46 @@ import withAuthorization from './withAuthorization';
 import {Link} from 'react-router-dom';
 
 
-export default class Topic extends Component {
+class Topic extends Component {
   constructor(props)
   {
       super(props);
 
-      this.state = {pet: []}
-      console.log(this.props);
-      console.log(this.props.match);
+  }
+  imageUpload()
+  {
+    console.log(firebase);
+
+    const ref = firebase.storage.ref();
+    const file = document.querySelector('#photo').files[0];
+    const name = (+new Date()) + '-' + file.name;
+    const metadata = { contentType: file.type };
+    const task = ref.child(name).put(file, metadata);
+
+    task.then((snapshot) => {
+        console.log(snapshot.downloadURL);
+    });
+
+    
   }
   componentDidMount()
   {
-    firebase.auth.onAuthStateChanged((user)=> {
-      if (user) {
-        // db.yourPets(user["uid"]).then(snapshot =>
-        //   console.log(snapshot.val())
-        // )
 
-        db.getPet(user["uid"], this.props.match.params.name).then(snapshot =>
-          // console.log(snapshot.val())
-          this.setState(() => ({ pet: snapshot.val() }))
-        );
-
-      } else {
-      }
-    })
   }
   render() {
 
     return (
       <div>
-          <p>{this.state.pet["petname"]}</p>
-          <p>{this.state.pet["dob"]}</p>
-          <p>{this.state.pet["img"]}</p>
+        <input type="file" id="photo" />
+        <button className="btn btn-danger btn-block" onClick={ this.imageUpload }>
+          Upload image
+        </button>
       </div>
     );
   }
 }
+
+
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(Topic);

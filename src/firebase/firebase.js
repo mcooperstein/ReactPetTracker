@@ -5,7 +5,7 @@ const config = {
     authDomain: "pet-tracker-f5647.firebaseapp.com",
     databaseURL: "https://pet-tracker-f5647.firebaseio.com",
     projectId: "pet-tracker-f5647",
-    storageBucket: "",
+    storageBucket: "pet-tracker-f5647.appspot.com",
     messagingSenderId: "835618976247"
   };
   if (!firebase.apps.length) {
@@ -14,8 +14,9 @@ const config = {
 
 const auth = firebase.auth();
 const db = firebase.database();
-
+const storage = firebase.storage();
 export {
   db,
   auth,
+  storage
 };
