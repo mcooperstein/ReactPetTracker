@@ -26,7 +26,7 @@ const App = () => {
           <Navigation />
           <Switch>
             <Route path="/add-pet-profile" component={Addpetprofile} />
-            <Route path="/edit-pet-profile" component={Editpetprofile} />
+            <Route path="/pets/:id/edit-pet-profile" component={Editpetprofile} />
             <Route path="/pets/:id" component={Petprofile} />
             <Route path="/your-pets/medical-record/:name" component={Medicalrecord} />
             <Route path="/your-pets/daily-log/:name" component={Dailylog} />

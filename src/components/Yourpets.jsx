@@ -38,12 +38,12 @@ export const Petlist = ({ pets }) =>
     {pets ?
     Object.keys(pets).map(key =>
       <div className="card" style={{ maxWidth: "300px"}} key={pets[key].petname}>
-  <img className="card-img-top" src={pets[key].img} alt="Card image cap"/>
+  <img className="card-img-top" src={pets[key].img} alt={`image of ${pets[key].petname}`}/>
   <div className="card-body">
     <h5 className="card-title">{pets[key].petname}</h5>
     <p className="card-text">Date of Birth: {pets[key].dob}</p>
     <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
-    <Link className="btn btn-success" to="/edit-pet-profile">Edit Profile</Link>
+    <Link className="btn btn-success" to={`/pets/${key}/edit-pet-profile`}>Edit Profile</Link>
   </div>
 </div>) : <div>No pets :(</div> }
     </div>
