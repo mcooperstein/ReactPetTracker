@@ -10,7 +10,7 @@ export const doSignInWithEmailAndPassword = (email, password) =>
 
 // Sign out
 export const doSignOut = () =>
-  localStorage.clear();
+  localStorage.clear(); // Clear past function calls. For some reason, stored previous data
   auth.signOut();
 
 // Password Reset

@@ -23,6 +23,8 @@ export default class Petprofile extends Component {
           );
 
         } else {
+          window.location.href = '/';
+          // if user is not logged in, go back to the home page
         }
       })
     }
