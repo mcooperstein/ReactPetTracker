@@ -43,7 +43,7 @@ export const Petlist = ({ pets }) =>
     <h5 className="card-title">{pets[key].petname}</h5>
     <p className="card-text">Date of Birth: {pets[key].dob}</p>
     <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
-    <Link className="btn btn-success" to={`/pets/${key}/edit-pet-profile`}>Edit Profile</Link>
+    <Link className="btn btn-success" to={`/edit-pet-profile/${key}`}>Edit Profile</Link>
   </div>
 </div>) : <div>No pets :(</div> }
     </div>

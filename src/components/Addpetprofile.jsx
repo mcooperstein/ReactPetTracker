@@ -112,7 +112,7 @@ class Addpetpage extends Component {
           type="text"
         />
       */}
-      <input type="file" id="photo" />
+      <input type="file" id="photo" required />
       <img src={ this.state.img } />
         <button id="sign-up-button" type="submit" className="btn btn-primary btn-block">
           Add Pet
