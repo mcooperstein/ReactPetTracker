@@ -29,9 +29,19 @@ export default class Petprofile extends Component {
     render() {
 
       return (
-        <div>
+        <div className="container">
             <h1 id="pet-profile-header">{this.state.pet["petname"]}</h1>
-            <Dailylog id={this.props.match.params.id} petName={this.state.pet["petname"]}/>
+            <div className="row">
+            <div className="col-4">
+              <h3>Medical History</h3>
+            </div>
+            <div className="col-4">
+              <Dailylog id={this.props.match.params.id} petName={this.state.pet["petname"]}/>
+            </div>
+            <div className="col-4">
+              <h3>Upcoming Appointments</h3>
+            </div>
+          </div>
         </div>
       );
     }

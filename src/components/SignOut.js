@@ -8,7 +8,8 @@ class SignOutButton extends Component{
       <div>
         <button className="btn btn-warning" onClick={auth.doSignOut}>
           {/* <button type="button" onClick={this.setState(() => ({ authUser: null }))}> */}
-          <Link to="/">Sign Out</Link>
+          {/* <Link to="/">Sign Out</Link> */}
+          Sign Out
         </button>
       </div>
     )
