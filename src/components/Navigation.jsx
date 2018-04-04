@@ -57,9 +57,6 @@ class NavigationAuth extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/add-pet-profile">Create Pet Profile</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/edit-pet-profile">Edit Pet Profile</Link>
-            </li>
             </ul>
             <ul className="navbar-nav navbar-right">
             <li className="nav-item">
