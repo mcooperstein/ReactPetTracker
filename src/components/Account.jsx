@@ -33,6 +33,7 @@ class AccountPage extends Component {
 
     this.state = {
       authUser: null,
+      pets: []
     };
   }
 
@@ -42,7 +43,13 @@ class AccountPage extends Component {
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
+
+        db.yourPets(authUser["uid"]).then(snapshot =>
+          // console.log(snapshot.val())
+          this.setState(() => ({ pets: snapshot.val() }))
+        );
     });
+
   }
   componentDidMount() {
       this.accountUpdate();
@@ -54,7 +61,7 @@ class AccountPage extends Component {
           { this.state.authUser ?
               <div>
                   <h4>Account Username: {this.state.authUser.email}</h4>
-                  <h6>Number of Pets: (WANT TO DISPLAY THIS INFO)</h6>
+                  <h6>Number of Pets: {Object.keys(this.state.pets).length}</h6>
                   <PasswordChangeForm />
               </div>
               : <div> Loading... </div>
