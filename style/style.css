@@ -114,7 +114,25 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 /* ----------------- */
 
 
-#pet-profile-header {
+#pet-profile-header, #edit-pet-profile-header {
   text-align:center;
   margin: 20px 0;
 }
+
+/* Create Pet Profile CSS */
+
+#create-pet-profile-header {
+  text-align:center;
+  margin: 20px 0;
+}
+
+#upload-photo {
+  display:block;
+}
+
+#create-pet-button {
+  margin:0;
+}
+
+
+/* ----------------- */

@@ -80,22 +80,30 @@ class Editpetprofile extends Component {
       }
     })
   }
+  onUpdatePicture(){
+
+  }
   render() {
     return (
       <div>
-        <h1>Edit Pet Profile for {this.state.pet["petname"]}</h1>
+        <h1 id="edit-pet-profile-header">Edit Pet Profile for {this.state.pet["petname"]}</h1>
         <div className="card-deck">
-          <img className="card-img-top" src={this.state.pet.img} alt={`image of ${this.state.pet.petname}`}/>
+          <div className="card" style={{maxWidth:'500px', display:'block', margin: 'auto'}}>
+            <div className="row">
+            <div className="col-12 col-sm-4">
+              <img className="card-img-top" src={this.state.pet.img} alt={`image of ${this.state.pet.petname}`}/>
+            </div>
+            <div className="col-12 col-sm-8">
+              <h3 className="card-title">{this.state.pet.petname}</h3>
+              <p className="card-text">Date of Birth: {this.state.pet.dob}</p>
+              <label className="control-label">Upload New Profile Picture</label>
+              <input type="file" id="upload-photo" required />
+              <button className="btn btn-success" onClick={this.onUpdatePicture} style={{marginTop:"20px"}}>Edit Profile Picture</button>
+            </div>
+          </div>
+
           <div className="card-body">
-            <h5 className="card-title">{this.state.pet.petname}</h5>
-            <p className="card-text">Date of Birth: {this.state.pet.dob}</p>
             <div className="form-group">
-              <label className="control-label">Edit Profile Picture {this.state.petUrl}</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Upload URL"
-            />
             <Modal
               isOpen={this.state.modalIsOpen}
               onRequestClose={this.closeModal}
@@ -104,13 +112,13 @@ class Editpetprofile extends Component {
               id="how-it-works-modal"
             >
               <h2>Are you sure you want to Delete?<span id="are-you-sure-span">(this action cannot be undone)</span></h2>
-              <button id="delete-profile" className="btn btn-secondary btn-sm" onClick={this.onDelete}>Submit</button>
+              <button id="delete-profile" className="btn btn-danger btn-sm" onClick={this.onDelete}>Confirm Delete</button>
               <button id="cancel-delete" className="btn btn-secondary btn-sm" onClick={this.closeModal}>Cancel</button>
             </Modal>
-              <button className="btn btn-success">Edit Profile Picture</button>
-              <button className="btn btn-danger" onClick={this.openModal}>Delete Profile</button>
+              <button className="btn btn-danger btn-block" onClick={this.openModal}>Delete Profile</button>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );

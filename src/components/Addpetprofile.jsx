@@ -17,6 +17,7 @@ const INITIAL_STATE = {
 
 const Addpetprofile = ({history}) =>
   <div>
+    <h1 id="create-pet-profile-header">Create New Pet Profile</h1>
     <Addpetpage history={history} />
   </div>
 
@@ -55,7 +56,7 @@ class Addpetpage extends Component {
       });
       */
       const ref = firebase.storage.ref();
-      const file = document.querySelector('#photo').files[0];
+      const file = document.querySelector('#upload-photo').files[0];
       const name = (+new Date()) + '-' + file.name;
       const metadata = { contentType: file.type };
       const task = ref.child(name).put(file, metadata);
@@ -112,9 +113,10 @@ class Addpetpage extends Component {
           type="text"
         />
       */}
-      <input type="file" id="photo" required />
+      <label className="control-label">Upload Image</label>
+      <input type="file" id="upload-photo" required />
       <img src={ this.state.img } />
-        <button id="sign-up-button" type="submit" className="btn btn-primary btn-block">
+        <button id="create-pet-button" type="submit" className="btn btn-primary btn-block">
           Add Pet
         </button>
         { this.state.error && <p>{this.state.error.message}</p> }
