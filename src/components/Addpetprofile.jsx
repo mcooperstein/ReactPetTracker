@@ -62,6 +62,7 @@ class Addpetpage extends Component {
       const task = ref.child(name).put(file, metadata);
 
       task.then((snapshot) => {
+        console.log(snapshot.downloadURL)
         firebase.auth.onAuthStateChanged((user)=> {
           if (user) {
             console.log(user["uid"], petname);
@@ -73,7 +74,8 @@ class Addpetpage extends Component {
             })
 
             .catch(error => {
-              this.setState(byPropKey('error', error));
+              // this.setState(byPropKey('error', error));
+              console.log('Error:',error);
             });
 
           } else {
@@ -102,7 +104,7 @@ class Addpetpage extends Component {
           value={this.state.dob}
           onChange={event => this.setState(byPropKey('dob', event.target.value))}
           type="text"
-          placeholder="Date of birth"
+          placeholder="Format: MM/DD/YYYY"
         />
       {/*
       <label className="control-label">Upload image</label>

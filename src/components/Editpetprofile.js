@@ -3,6 +3,7 @@ import { db,auth,firebase } from '../firebase';
 import withAuthorization from './withAuthorization';
 import {Link, withRouter} from 'react-router-dom';
 import Modal from 'react-modal';
+import {calculateAge} from './Yourpets';
 
 const customStyles = {
   content : {
@@ -155,6 +156,7 @@ class Editpetprofile extends Component {
             </div>
             <div className="col-12 col-sm-8">
               <h3 className="card-title">{this.state.pet.petname}</h3>
+              <p className="card-text">Age: {calculateAge(this.state.pet.dob)}</p>
               <p className="card-text">Date of Birth: {this.state.pet.dob}</p>
               <label className="control-label">Upload New Profile Picture</label>
               <input type="file" id="upload-photo" required />

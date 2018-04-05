@@ -32,6 +32,18 @@ export default class Dailylog extends Component {
         }
       })
     }
+    deleteLogs = () => {
+      firebase.auth.onAuthStateChanged((user)=> {
+        if (user) {
+          db.deleteDailyLog(user["uid"], this.props.id).then(() =>
+            // console.log(snapshot.val())
+            this.getLogs()
+          );
+
+        } else {
+        }
+      })
+    }
     onSubmit = (event) =>{
       const {
         time,
@@ -58,21 +70,48 @@ export default class Dailylog extends Component {
 
       event.preventDefault();
     }
-    render() {
+    populateTime =(event)=>{
+      var currentTime = new Date(),
+      hours = currentTime.getHours(),
+      minutes = currentTime.getMinutes();
 
+	     if (minutes < 10) {
+	        minutes = "0" + minutes;
+        }
+	     var suffix = "AM";
+	        if (hours >= 12) {
+            suffix = "PM";
+            hours = hours - 12;
+	         }
+	        if (hours == 0) {
+	          hours = 12;
+	         }
+      let time =`${hours}:${minutes} ${suffix}`
+      // return `${hours}:${minutes} ${suffix}`
+      // console.log(`${hours}:${minutes} ${suffix}`)
+      this.setState(byPropKey('time', time))
+    }
+    render() {
       return (
         <div>
-          <h2 className="text-center">Daily Log</h2>
+          <h4 className="text-center">Daily Log</h4>
           <div id="daily-logs-div">
+            <p style={{fontWeight:'bolder', display: 'inline-block'}}>{displayDate()}</p>
+            <button className="btn btn-danger btn-sm" style={{float: 'right'}} onClick={this.deleteLogs}>Clear All</button>
             <PetDailyLogs dailyLog={this.state.dailyLog} petName={this.props.petName}/>
             <form onSubmit={this.onSubmit} className="form-group">
-              <label className="control-label">Enter Time</label>
+              <label className="control-label" style={{display:'block'}}>Enter Time</label>
+              <div>
               <input
                 className="form-control"
                 placeholder="Enter Time"
                 value={this.state.time}
+                style={{display:'inline-block', width: '50%', padding: '4px 12px'}}
                 onChange={event => this.setState(byPropKey('time', event.target.value))}
+                required
               />
+              <button className="btn btn-success btn-sm" style={{display:'inline-block', marginBottom:'3px'}} onClick={this.populateTime}>Current Time</button>
+            </div>
               <label className="control-label">Enter Content</label>
               <input
                 className="form-control"
@@ -87,6 +126,18 @@ export default class Dailylog extends Component {
       );
     }
   }
+
+  function displayDate(){
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+    var currentDay = new Date().getDay();
+    var dayOfWeek = days[currentDay-1];
+    var currentMonth = new Date().getMonth();
+    var month = months[currentMonth];
+    var dateNum = new Date().getDate();
+    return `${dayOfWeek} ${month} ${dateNum}`;
+  }
+
 
   const PetDailyLogs = ({ dailyLog, petName }) =>
     <div style={{maxHeight:'200px', overflow: 'auto'}}>

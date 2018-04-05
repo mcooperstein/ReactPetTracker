@@ -33,6 +33,9 @@ export const addDailyLog = (id, url, time, content) =>
       content
 });
 
+export const deleteDailyLog = (id, url) =>
+    db.ref(`users/${id}/pets/${url}/daily-log`).remove();
+
 export const deletePetProfile = (id, url) =>
   db.ref(`users/${id}/pets/${url}`).remove();
 
