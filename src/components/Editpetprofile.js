@@ -15,6 +15,12 @@ const customStyles = {
   }
 };
 
+const INITIAL_STATE = {
+  petname: "",
+  dob: "",
+  img: "",
+  error: null,
+};
 
 const EditpetprofilePage = ({history ,match}) =>
   <div>
@@ -33,6 +39,7 @@ class Editpetprofile extends Component {
       this.openModal = this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
       this.onDelete = this.onDelete.bind(this);
+      this.onUpdatePicture = this.onUpdatePicture.bind(this);
 
       console.log(this.props);
 
@@ -64,6 +71,62 @@ class Editpetprofile extends Component {
       }
     })
   }
+  onUpdatePicture() {
+    const {
+      petname,
+      img,
+    } = this.state;
+    const {
+      history,
+    } = this.props;
+    /*
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+
+
+        db.doCreateUser(authUser.uid, username, email)
+          .then(() => {
+            this.setState(() => ({ ...INITIAL_STATE }));
+            history.push("/");
+          })
+          .catch(error => {
+            this.setState(byPropKey('error', error));
+          });
+
+      })
+      .catch(error => {
+        this.setState(byPropKey('error', error));
+      });
+      */
+      const ref = firebase.storage.ref();
+      const file = document.querySelector('#upload-photo').files[0];
+      const name = (+new Date()) + '-' + file.name;
+      const metadata = { contentType: file.type };
+      const task = ref.child(name).put(file, metadata);
+      const url_for_pet = this.state.petUrl;
+
+      task.then((snapshot) => {
+        firebase.auth.onAuthStateChanged((user)=> {
+          if (user) {
+            console.log(user["uid"], url_for_pet);
+            db.changePetProfilePicture(user["uid"], url_for_pet, snapshot.downloadURL)
+            .then(() => {
+              this.setState(() => ({ ...INITIAL_STATE }));
+              //this.setState({...INITIAL_STATE})
+              history.push("/your-pets")
+            })
+
+            .catch(error => {
+              this.setState(byPropKey('error', error));
+            });
+
+          } else {
+          }
+        })
+      });
+
+    event.preventDefault();
+  }
   componentDidMount()
   {
     console.log(this.props.match.params.id);
@@ -79,9 +142,6 @@ class Editpetprofile extends Component {
         // if user is not logged in, go back to the home page
       }
     })
-  }
-  onUpdatePicture(){
-
   }
   render() {
     return (

@@ -35,3 +35,6 @@ export const addDailyLog = (id, url, time, content) =>
 
 export const deletePetProfile = (id, url) =>
   db.ref(`users/${id}/pets/${url}`).remove();
+
+export const changePetProfilePicture = (id,url,img) =>
+  db.ref(`users/${id}/pets/${url}`).update({img});
