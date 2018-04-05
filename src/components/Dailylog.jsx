@@ -62,7 +62,8 @@ export default class Dailylog extends Component {
 
       return (
         <div>
-          <h2>Daily Log for {this.props.petName}</h2>
+          <h2 className="text-center">Daily Log</h2>
+          <div id="daily-logs-div">
             <PetDailyLogs dailyLog={this.state.dailyLog} petName={this.props.petName}/>
             <form onSubmit={this.onSubmit} className="form-group">
               <label className="control-label">Enter Time</label>
@@ -79,17 +80,20 @@ export default class Dailylog extends Component {
                 value={this.state.content}
                 onChange={event => this.setState(byPropKey('content', event.target.value))}
                 required/>
-              <button className="btn btn-primary" type="submit">Submit</button>
+              <button className="btn btn-primary btn-block" type="submit">Submit</button>
             </form>
+          </div>
         </div>
       );
     }
   }
 
   const PetDailyLogs = ({ dailyLog, petName }) =>
-    <div>
+    <div style={{maxHeight:'200px', overflow: 'auto'}}>
       {dailyLog ?
       Object.keys(dailyLog).map(key =>
-        <div className="card" style={{ maxWidth: "300px"}} key={dailyLog[key].content}>
-    {dailyLog[key].content} @ {dailyLog[key].time}</div>) : <div>Nothing for {petName} today :(</div> }
+        <div className="card" key={dailyLog[key].content}>
+          <p className="text-center">{dailyLog[key].content} @ {dailyLog[key].time}</p>
+        </div>) : <div>Nothing for {petName} today :(</div>
+      }
     </div>

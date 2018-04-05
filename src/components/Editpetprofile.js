@@ -148,10 +148,10 @@ class Editpetprofile extends Component {
       <div>
         <h1 id="edit-pet-profile-header">Edit Pet Profile for {this.state.pet["petname"]}</h1>
         <div className="card-deck">
-          <div className="card" style={{maxWidth:'500px', display:'block', margin: 'auto'}}>
+          <div className="card"id="edit-pet-card">
             <div className="row">
             <div className="col-12 col-sm-4">
-              <img className="card-img-top" src={this.state.pet.img} alt={`image of ${this.state.pet.petname}`}/>
+              <img className="card-img-top" id="edit-pet-img" src={this.state.pet.img} alt={`image of ${this.state.pet.petname}`}/>
             </div>
             <div className="col-12 col-sm-8">
               <h3 className="card-title">{this.state.pet.petname}</h3>
@@ -162,7 +162,7 @@ class Editpetprofile extends Component {
             </div>
           </div>
 
-          <div className="card-body">
+          <div className="card-body" id="edit-pet-footer">
             <div className="form-group">
             <Modal
               isOpen={this.state.modalIsOpen}

@@ -136,3 +136,40 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 
 
 /* ----------------- */
+
+/* Edit Pet Profile CSS */
+
+#edit-pet-card {
+    max-width: 500px;
+    display: block;
+    margin: auto;
+    padding: 15px;
+    background-color: rgba(220,220,220,0.8);
+}
+
+#edit-pet-img {
+  height: 100%;
+  border: 2px solid;
+}
+
+#edit-pet-footer {
+  padding: 2rem 0 0 0;
+}
+
+#edit-pet-footer > .form-group {
+  margin: 0;
+}
+
+/* ----------------- */
+
+/* Daily Logs CSS */
+
+#daily-logs-div {
+  border: 2px solid;
+  padding: 10px;
+  background-color: rgba(220,220,220,0.8);
+}
+
+
+
+/* ----------------- */
