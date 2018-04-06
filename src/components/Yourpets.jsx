@@ -82,13 +82,13 @@ class Petlist extends Component {
             <h5 className="card-title">{pets[key].petname}</h5>
           </div>
           <div className="col-6">
-            <h6 style={{display:'inline'}}>Re-order</h6>
+            {/* <h6 style={{display:'inline'}}>Re-order</h6>
               <select value={Number(pets[key].ranking)} onChange={(event) => this.handleRanking(event, key)}>
                 { Object.keys(pets).map((key,index) =>
                     <option value={Number(index+1)} key={key + index}>{Number(index+1)}</option>
                   )
                 }
-              </select>
+              </select> */}
             {/* {<button className="btn btn-warning btn-sm" style={{float:'right'}} onClick={reOrder(1)}>Submit</button>} */}
           </div>
       </div>

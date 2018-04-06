@@ -52,14 +52,23 @@ export const addAppointment = (id, url, date, time, content) =>
       content
 });
 
-export const completeAppointment = (id, url, record) =>
+// export const completeAppointment = (id, url, record, completed) =>
+//     db.ref(`users/${id}/pets/${url}/appointments/${record}`).update({completed});
+
+export const completeAppointment = (id, url, date, time, content, record) =>
     db.ref(`users/${id}/pets/${url}/completed-appointments`).push({
+      date,
+      time,
+      content,
       record
 });
     //db.ref(`users/${id}/pets/${url}/appointments/${record}`).remove();
 
 export const getCompletedAppointments = (id, url) =>
   db.ref(`users/${id}/pets/${url}/completed-appointments`).once('value');
+
+export const deleteCompletedAppointment = (id,url,record) =>
+  db.ref(`users/${id}/pets/${url}/completed-appointments/${record}`).remove();
 
 export const deleteMedicalRecord = (id,url,record) =>
   db.ref(`users/${id}/pets/${url}/medical-records/${record}`).remove();

@@ -25,6 +25,7 @@ export default class Appointments extends Component {
   componentDidMount()
   {
     this.getAppointments();
+    this.showCompletedAppointments();
   }
   getAppointments = () => {
     firebase.auth.onAuthStateChanged((user)=> {
@@ -46,6 +47,9 @@ export default class Appointments extends Component {
       if (user) {
         db.getCompletedAppointments(user["uid"], this.props.match.params.id).then(snapshot =>
           this.setState(() => ({completedAppointments: snapshot.val()}))
+        );
+        db.getPetAppointments(user["uid"], this.props.match.params.id).then(snapshot =>
+          this.setState(() => ({appointments: snapshot.val()}))
         );
         db.getPet(user["uid"], this.props.match.params.id).then(snapshot =>
           // console.log(snapshot.val())
@@ -94,9 +98,24 @@ export default class Appointments extends Component {
       }
     })
   }
-  onCompleteAppointment = (key) => {
+  onDeleteCompletedAppointment = (key) => {
     firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
+        db.deleteCompletedAppointment(user["uid"], this.props.match.params.id, key).then(() =>
+          // console.log('Delete worked', key)
+          this.showCompletedAppointments()
+        );
+      } else {
+      }
+    })
+  }
+  onCompleteAppointment = (date, time, content, key) => {
+    firebase.auth.onAuthStateChanged((user)=> {
+      if (user) {
+        db.completeAppointment(user["uid"], this.props.match.params.id, date, time, content, key).then(() =>
+          //console.log('Completed worked', key)
+          this.showCompletedAppointments()
+        )
         db.deleteAppointment(user["uid"], this.props.match.params.id, key).then(() =>
           // console.log('Delete worked', key)
           this.getAppointments()
@@ -150,7 +169,7 @@ export default class Appointments extends Component {
           <div className="card" key={this.state.appointments[key].date+key}>
             <p style={{margin:'5px', display:'inline-block'}}>{this.state.appointments[key].date} @ {this.state.appointments[key].time}: {this.state.appointments[key].content}
               {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={this.onDeleteRecord(key)}>Delete</button> */}
-              <button className="btn btn-success btn-sm" style={{float:'right'}} onClick={()=>this.onCompleteAppointment(key)}>Completed</button>
+              <button className="btn btn-success btn-sm" style={{float:'right'}} onClick={()=>this.onCompleteAppointment(this.state.appointments[key].date,this.state.appointments[key].time,this.state.appointments[key].content,key)}>Completed</button>
               <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteAppointment(key)}>Delete</button>
             </p>
           </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Appointments scheduled for {this.state.pet['petname']} *</h4></div>}
@@ -164,12 +183,12 @@ export default class Appointments extends Component {
           <div style={{maxHeight:'250px', overflow: 'scroll'}}>
           {this.state.completedAppointments!==null? Object.keys(this.state.completedAppointments).map(key=>
             <div className="card" key={this.state.completedAppointments[key].date+key}>
-              <p style={{margin:'5px', display:'inline-block'}}>{this.state.appointments[key].date} @ {this.state.appointments[key].time}: {this.state.appointments[key].content}
-                {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={this.onDeleteRecord(key)}>Delete</button> */}
-                <button className="btn btn-success btn-sm" style={{float:'right'}} onClick={()=>this.onCompleteAppointment(key)}>Completed</button>
-                <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteAppointment(key)}>Delete</button>
+              <p style={{margin:'5px', display:'inline-block'}}>{this.state.completedAppointments[key].date} @ {this.state.completedAppointments[key].time}: {this.state.completedAppointments[key].content}
+                {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={console.log(this.state.appointments[key].completed)}>Delete</button> */}
+                <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteCompletedAppointment(key)}>Delete</button>
               </p>
-            </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Appointments scheduled for {this.state.pet['petname']} *</h4></div>}
+            </div>
+          ): <div className="text-center" style={{marginTop: '10px'}}><h4 style={{color: 'black', textDecoration:'underline'}}>* No Completed for {this.state.pet['petname']} *</h4></div>}
           </div>
         </div>
       </div>
