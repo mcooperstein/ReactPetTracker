@@ -30,6 +30,9 @@ export const getPetDailyLog = (id, url) =>
 export const getPetRecords = (id, url) =>
   db.ref(`users/${id}/pets/${url}/medical-records`).once('value');
 
+export const getPetAppointments = (id, url) =>
+  db.ref(`users/${id}/pets/${url}/appointments`).once('value');
+
 export const addDailyLog = (id, url, time, content) =>
     db.ref(`users/${id}/pets/${url}/daily-log`).push({
       time,
@@ -42,8 +45,18 @@ export const addMedicalRecord = (id, url, date, content) =>
       content
 });
 
+export const addAppointment = (id, url, date, time, content) =>
+    db.ref(`users/${id}/pets/${url}/appointments`).push({
+      date,
+      time,
+      content
+});
+
 export const deleteMedicalRecord = (id,url,record) =>
   db.ref(`users/${id}/pets/${url}/medical-records/${record}`).remove();
+
+export const deleteAppointment = (id,url,record) =>
+  db.ref(`users/${id}/pets/${url}/appointments/${record}`).remove();
 
 export const deleteDailyLog = (id, url) =>
     db.ref(`users/${id}/pets/${url}/daily-log`).remove();
