@@ -75,6 +75,18 @@ export default class Medicalrecord extends Component {
 
     event.preventDefault();
   }
+  onDeleteRecord = (key) => {
+    firebase.auth.onAuthStateChanged((user)=> {
+      if (user) {
+        db.deleteMedicalRecord(user["uid"], this.props.id, key).then(() =>
+          // console.log(snapshot.val())
+          this.getRecords()
+        );
+
+      } else {
+      }
+    })
+  }
   render() {
     return (
       <div>
@@ -106,9 +118,19 @@ export default class Medicalrecord extends Component {
         </form>
       </div>
       <div className="col-6">
-        <div id="medical-notes-div">
+        <div id="medical-notes-div" style={{minHeight: '259px'}}>
         <h4 className="text-center" style={{color:'white'}}>List of Medical Notes</h4>
-        <PetRecords medicals={this.state.medicals} petName={this.state.pet['petname']}/>
+        {/* <PetRecords medicals={this.state.medicals} petName={this.state.pet['petname']}/> */}
+        {/* {Object.keys(this.state.medicals).length>0? Object.keys(this.state.medicals).map(key=>
+        <p>{this.state.medicals[key].content}</p>): <p>No items</p>} */}
+        {this.state.medicals!==null? Object.keys(this.state.medicals).map(key=>
+          <div className="card" key={this.state.medicals[key].date}>
+            <p style={{margin:'5px', display:'inline-block'}}>{this.state.medicals[key].date}: {this.state.medicals[key].content}
+              {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={this.onDeleteRecord(key)}>Delete</button> */}
+              <button className="btn btn-danger btn-sm" style={{float:'right'}} disabled onClick={console.log(key)}>Delete</button>
+            </p>
+          </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Medical Notes for {this.state.pet['petname']} *</h4></div>}
+
       </div>
       </div>
       </div>
@@ -117,20 +139,7 @@ export default class Medicalrecord extends Component {
   }
 }
 
-function deleteMedical(medicalRecord){
-  firebase.auth.onAuthStateChanged((user)=> {
-    if (user) {
-      // db.deleteDailyLog(user["uid"], this.props.id).then(() =>
-      //   // console.log(snapshot.val())
-      //   this.getLogs()
-      // );
-      console.log(medicalRecord)
-
-    } else {
-    }
-  })
-}
-
+/*
 const PetRecords = ({ medicals, petName }) =>
   <div>
     {medicals ?
@@ -140,3 +149,4 @@ const PetRecords = ({ medicals, petName }) =>
       </div>) : <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Medical Notes for {petName} *</h4></div>
     }
   </div>
+  */

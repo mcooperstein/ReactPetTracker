@@ -43,7 +43,7 @@ export default class Petprofile extends Component {
               <Dailylog id={petUrl} petName={this.state.pet["petname"]}/>
             </div>
             <div className="col-4">
-              <Link to="">
+              <Link to={`/pets/${petUrl}/appointments`}>
                 <h4 className="text-center">Upcoming Appointments</h4>
               </Link>
             </div>
