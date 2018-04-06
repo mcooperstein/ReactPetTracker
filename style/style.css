@@ -173,4 +173,14 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 
 
 
-/* ----------------- */
+/* Medical Records CSS */
+
+#medical-form {
+  padding: 25px;
+  background-color: rgba(220,220,220,0.8);
+}
+
+#medical-notes-div {
+  padding: 25px;
+  background-color: rgba(220,20,60,0.8);
+}

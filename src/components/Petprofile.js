@@ -29,19 +29,23 @@ export default class Petprofile extends Component {
       })
     }
     render() {
-
+      let petUrl = this.props.match.params.id;
       return (
         <div className="container">
             <h1 id="pet-profile-header">{this.state.pet["petname"]}</h1>
             <div className="row">
             <div className="col-4">
-              <h4 className="text-center">Medical History</h4>
+              <Link to={`/pets/${petUrl}/medical-records`}>
+                <h4 className="text-center">Medical History</h4>
+              </Link>
             </div>
             <div className="col-4">
-              <Dailylog id={this.props.match.params.id} petName={this.state.pet["petname"]}/>
+              <Dailylog id={petUrl} petName={this.state.pet["petname"]}/>
             </div>
             <div className="col-4">
-              <h4 className="text-center">Upcoming Appointments</h4>
+              <Link to="">
+                <h4 className="text-center">Upcoming Appointments</h4>
+              </Link>
             </div>
           </div>
         </div>
