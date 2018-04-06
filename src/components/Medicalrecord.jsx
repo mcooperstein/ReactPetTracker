@@ -78,10 +78,11 @@ export default class Medicalrecord extends Component {
   onDeleteRecord = (key) => {
     firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
-        db.deleteMedicalRecord(user["uid"], this.props.id, key).then(() =>
-          console.log('Delete worked', key)
-          // this.getRecords()
+        db.deleteMedicalRecord(user["uid"], this.props.match.params.id, key).then(() =>
+          // console.log('Delete worked', key)
+          this.getRecords()
         );
+        // console.log('Delete worked', key)
 
       } else {
       }
