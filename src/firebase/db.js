@@ -56,7 +56,7 @@ export const completeAppointment = (id, url, record) =>
     db.ref(`users/${id}/pets/${url}/completed-appointments`).push({
       record
 });
-    db.ref(`users/${id}/pets/${url}/appointments/${record}`).remove();
+    //db.ref(`users/${id}/pets/${url}/appointments/${record}`).remove();
 
 export const getCompletedAppointments = (id, url) =>
   db.ref(`users/${id}/pets/${url}/completed-appointments`).once('value');
@@ -75,3 +75,6 @@ export const deletePetProfile = (id, url) =>
 
 export const changePetProfilePicture = (id,url,img) =>
   db.ref(`users/${id}/pets/${url}`).update({img});
+
+export const updateRankingOfPet = (id,url,ranking) =>
+  db.ref(`users/${id}/pets/${url}`).update({ ranking });
