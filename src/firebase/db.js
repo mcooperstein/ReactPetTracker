@@ -52,6 +52,15 @@ export const addAppointment = (id, url, date, time, content) =>
       content
 });
 
+export const completeAppointment = (id, url, record) =>
+    db.ref(`users/${id}/pets/${url}/completed-appointments`).push({
+      record
+});
+    db.ref(`users/${id}/pets/${url}/appointments/${record}`).remove();
+
+export const getCompletedAppointments = (id, url) =>
+  db.ref(`users/${id}/pets/${url}/completed-appointments`).once('value');
+
 export const deleteMedicalRecord = (id,url,record) =>
   db.ref(`users/${id}/pets/${url}/medical-records/${record}`).remove();
 

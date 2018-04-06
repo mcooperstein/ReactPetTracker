@@ -16,7 +16,7 @@ export default class Appointments extends Component {
   constructor(props)
   {
       super(props);
-      this.state = {appointments: [], pet:[]}
+      this.state = {appointments: [], pet:[], completedAppointments: []}
       // this.state = {pet: []}
       console.log(this.props);
       console.log(this.props.match.params.id);
@@ -31,6 +31,21 @@ export default class Appointments extends Component {
       if (user) {
         db.getPetAppointments(user["uid"], this.props.match.params.id).then(snapshot =>
           this.setState(() => ({appointments: snapshot.val()}))
+        );
+        db.getPet(user["uid"], this.props.match.params.id).then(snapshot =>
+          // console.log(snapshot.val())
+          this.setState(() => ({ pet: snapshot.val() }))
+        );
+
+      } else {
+      }
+    })
+  }
+  showCompletedAppointments = () => {
+    firebase.auth.onAuthStateChanged((user)=> {
+      if (user) {
+        db.getCompletedAppointments(user["uid"], this.props.match.params.id).then(snapshot =>
+          this.setState(() => ({completedAppointments: snapshot.val()}))
         );
         db.getPet(user["uid"], this.props.match.params.id).then(snapshot =>
           // console.log(snapshot.val())
@@ -69,6 +84,17 @@ export default class Appointments extends Component {
     event.preventDefault();
   }
   onDeleteAppointment = (key) => {
+    firebase.auth.onAuthStateChanged((user)=> {
+      if (user) {
+        db.deleteAppointment(user["uid"], this.props.match.params.id, key).then(() =>
+          // console.log('Delete worked', key)
+          this.getAppointments()
+        );
+      } else {
+      }
+    })
+  }
+  onCompleteAppointment = (key) => {
     firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
         db.deleteAppointment(user["uid"], this.props.match.params.id, key).then(() =>
@@ -135,6 +161,16 @@ export default class Appointments extends Component {
       <div className="col-8 float-right">
         <div id="past-appointments-div">
           <h4 className="text-center">Completed Appointments</h4>
+          <div style={{maxHeight:'250px', overflow: 'scroll'}}>
+          {this.state.completedAppointments!==null? Object.keys(this.state.completedAppointments).map(key=>
+            <div className="card" key={this.state.completedAppointments[key].date+key}>
+              <p style={{margin:'5px', display:'inline-block'}}>{this.state.appointments[key].date} @ {this.state.appointments[key].time}: {this.state.appointments[key].content}
+                {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={this.onDeleteRecord(key)}>Delete</button> */}
+                <button className="btn btn-success btn-sm" style={{float:'right'}} onClick={()=>this.onCompleteAppointment(key)}>Completed</button>
+                <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteAppointment(key)}>Delete</button>
+              </p>
+            </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Appointments scheduled for {this.state.pet['petname']} *</h4></div>}
+          </div>
         </div>
       </div>
       </div>
