@@ -40,9 +40,9 @@ export const Petlist = ({ pets }) =>
       <div className="card" style={{ maxWidth: "300px", minWidth: "300px"}} key={pets[key].petname}>
   <img className="card-img-top" style={{height:"300px"}} src={pets[key].img} alt={`image of ${pets[key].petname}`}/>
   <div className="card-body">
-    Pet # {index+1}
-    <h5 className="card-title">{pets[key].petname}</h5>
-    {/* <div className="row">
+    {/* Pet # {index+1}
+    <h5 className="card-title">{pets[key].petname}</h5> */}
+    <div className="row">
       <div className="col-6">
         Pet # {index+1}
         <h5 className="card-title">{pets[key].petname}</h5>
@@ -55,9 +55,9 @@ export const Petlist = ({ pets }) =>
             <option value={`${index+1}`} key={index}>{index+1}</option>
           )}
         </select>
-        // {<button className="btn btn-warning btn-sm" style={{float:'right'}} onClick={reOrder(1)}>Submit</button>}
+        {/* {<button className="btn btn-warning btn-sm" style={{float:'right'}} onClick={reOrder(1)}>Submit</button>} */}
       </div>
-  </div>*/}
+  </div>
     <p className="card-text">Age: {calculateAge(pets[key].dob)}</p>
     <p className="card-text">Date of Birth: {pets[key].dob}</p>
     <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>

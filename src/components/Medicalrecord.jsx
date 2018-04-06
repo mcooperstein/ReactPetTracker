@@ -79,8 +79,8 @@ export default class Medicalrecord extends Component {
     firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
         db.deleteMedicalRecord(user["uid"], this.props.id, key).then(() =>
-          // console.log(snapshot.val())
-          this.getRecords()
+          console.log('Delete worked', key)
+          // this.getRecords()
         );
 
       } else {
@@ -124,10 +124,10 @@ export default class Medicalrecord extends Component {
         {/* {Object.keys(this.state.medicals).length>0? Object.keys(this.state.medicals).map(key=>
         <p>{this.state.medicals[key].content}</p>): <p>No items</p>} */}
         {this.state.medicals!==null? Object.keys(this.state.medicals).map(key=>
-          <div className="card" key={this.state.medicals[key].date}>
+          <div className="card" key={this.state.medicals[key].date+key}>
             <p style={{margin:'5px', display:'inline-block'}}>{this.state.medicals[key].date}: {this.state.medicals[key].content}
               {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={this.onDeleteRecord(key)}>Delete</button> */}
-              <button className="btn btn-danger btn-sm" style={{float:'right'}} disabled onClick={console.log(key)}>Delete</button>
+              <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteRecord(key)}>Delete</button>
             </p>
           </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Medical Notes for {this.state.pet['petname']} *</h4></div>}
 
