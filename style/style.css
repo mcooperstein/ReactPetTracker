@@ -196,3 +196,21 @@ div.ReactModal__Content.ReactModal__Content--after-open {
   padding: 25px;
   background-color: rgba(0,191,255,0.8);
 }
+
+#past-appointments-div {
+  padding: 25px;
+  background-color: rgba(220,20,60,0.8);
+}
+
+iframe {
+  height:300px;
+  width: 100%;
+  padding: 0px;
+}
+
+#cv_nav1_cv_monthgrid {
+  position: static !important;
+  overflow: visible !important;
+  width: 100% !important;
+
+}

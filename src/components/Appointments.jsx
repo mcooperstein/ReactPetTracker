@@ -129,8 +129,8 @@ export default class Appointments extends Component {
       <div>
         <h1 id="pet-profile-header">Upcoming Appointments for {this.state.pet['petname']}</h1>
         <div className="row">
-          <div className="col-4">
-        <form id="appointment-form" onSubmit={this.onSubmit} className="form-group" style={{height:'100%', padding:'25px 25px 0px 25px'}}>
+          <div className="col-4" style={{padding:'0'}}>
+        <form id="appointment-form" onSubmit={this.onSubmit} className="form-group" style={{height:'330px', padding:'25px 25px 0px 25px'}}>
           <h4 className="text-center">Add New Appointment</h4>
           <label className="control-label" style={{display:'block'}}>Enter Date</label>
           <input
@@ -157,9 +157,11 @@ export default class Appointments extends Component {
             required/>
           <button className="btn btn-primary btn-block" type="submit" style={{marginTop:'0px'}}>Submit</button>
         </form>
+        {/* <iframe id='cv_if1' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XGY&gtype=cv_monthgrid' allowTransparency='true' scrolling='no' frameborder='40' height='400' width='400'></iframe> */}
+        <iframe id='cv_if1' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XGY&gtype=cv_monthgrid&gchrome=1' allowTransparency='true' scrolling='no' frameborder='0'></iframe>
       </div>
-      <div className="col-8">
-        <div id="appointment-notes-div" style={{minHeight: '326px', maxHeight: '326px'}}>
+      <div className="col-8" style={{padding:'0'}}>
+        <div id="appointment-notes-div" style={{minHeight: '330px', maxHeight: '330px'}}>
         <h4 className="text-center" style={{color:'white'}}>List of Upcoming Appointments</h4>
         {/* <PetRecords medicals={this.state.medicals} petName={this.state.pet['petname']}/> */}
         {/* {Object.keys(this.state.medicals).length>0? Object.keys(this.state.medicals).map(key=>
@@ -175,23 +177,24 @@ export default class Appointments extends Component {
           </div>): <div className="text-center" style={{marginTop: '50px'}}><h4 style={{color: 'white', textDecoration:'underline'}}>* No Appointments scheduled for {this.state.pet['petname']} *</h4></div>}
         </div>
       </div>
-      </div>
-      </div>
-      <div className="col-8 float-right">
-        <div id="past-appointments-div">
-          <h4 className="text-center">Completed Appointments</h4>
-          <div style={{maxHeight:'250px', overflow: 'scroll'}}>
-          {this.state.completedAppointments!==null? Object.keys(this.state.completedAppointments).map(key=>
-            <div className="card" key={this.state.completedAppointments[key].date+key}>
-              <p style={{margin:'5px', display:'inline-block'}}>{this.state.completedAppointments[key].date} @ {this.state.completedAppointments[key].time}: {this.state.completedAppointments[key].content}
-                {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={console.log(this.state.appointments[key].completed)}>Delete</button> */}
-                <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteCompletedAppointment(key)}>Delete</button>
-              </p>
-            </div>
-          ): <div className="text-center" style={{marginTop: '10px'}}><h4 style={{color: 'black', textDecoration:'underline'}}>* No Completed for {this.state.pet['petname']} *</h4></div>}
+      <div id="past-appointments-div" style={{minHeight: '322px', maxHeight: '322px'}}>
+        <h4 className="text-center">Completed Appointments</h4>
+        <div style={{maxHeight:'250px', overflow: 'scroll'}}>
+        {this.state.completedAppointments!==null? Object.keys(this.state.completedAppointments).map(key=>
+          <div className="card" key={this.state.completedAppointments[key].date+key}>
+            <p style={{margin:'5px', display:'inline-block'}}>{this.state.completedAppointments[key].date} @ {this.state.completedAppointments[key].time}: {this.state.completedAppointments[key].content}
+              {/* <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={console.log(this.state.appointments[key].completed)}>Delete</button> */}
+              <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={()=>this.onDeleteCompletedAppointment(key)}>Delete</button>
+            </p>
           </div>
+        ): <div className="text-center" style={{marginTop: '10px'}}><h4 style={{color: 'black', textDecoration:'underline'}}>* None *</h4></div>}
         </div>
       </div>
+      </div>
+      </div>
+      {/* <div className="col-8 float-right">
+
+      </div> */}
       </div>
     );
   }
