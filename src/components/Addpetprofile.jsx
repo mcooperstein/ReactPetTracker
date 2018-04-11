@@ -12,7 +12,9 @@ const INITIAL_STATE = {
   petname: "",
   dob: "",
   img: "",
+  ranking: "",
   error: null,
+  pets: []
 };
 
 const Addpetprofile = ({history}) =>
@@ -27,11 +29,18 @@ class Addpetpage extends Component {
 
     this.state = {...INITIAL_STATE};
   }
+  componentDidMount(){
+    db.yourPets(authUser["uid"]).then(snapshot =>
+      // console.log(snapshot.val())
+      this.setState(() => ({ pets: snapshot.val() }))
+    );
+  }
   onSubmit = (event) => {
     const {
       petname,
       dob,
       img,
+      ranking
     } = this.state;
     const {
       history,
@@ -66,7 +75,7 @@ class Addpetpage extends Component {
         firebase.auth.onAuthStateChanged((user)=> {
           if (user) {
             console.log(user["uid"], petname);
-            db.addPetprofile(user["uid"], petname, dob, snapshot.downloadURL)
+            db.addPetprofile(user["uid"], petname, dob, snapshot.downloadURL, Object.keys(this.state.pets).length+1)
             .then(() => {
               this.setState(() => ({ ...INITIAL_STATE }));
               //this.setState({...INITIAL_STATE})

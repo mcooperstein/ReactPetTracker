@@ -12,23 +12,27 @@ import { compose } from 'recompose';
 
 
 class Yourpets extends Component {
-  componentDidMount()
-  {
+  accountUpdate(){
     const { onSetPets } = this.props;
 
     firebase.auth.onAuthStateChanged((user)=> {
       if (user) {
         db.yourPets(user["uid"]).then(snapshot =>
-          // console.log(snapshot.val())
-          onSetPets(snapshot.val())
-        );
+          //console.log(JSON.parse(JSON.stringify(snapshot.val())))
+          onSetPets(snapshot.val()))
+          //console.log(Object.values(snapshot.val()).sort((a,b)=>a.ranking-b.ranking)))
       } else {
       }
     })
   }
+  componentDidMount()
+  {
+    this.accountUpdate();
+  }
   render() {
-    // console.log(Object.keys(this.props.pets))
+
     const { yourpets,changePetRanking } = this.props;
+
     return (
       <div>
           <Petlist pets={ yourpets} changePetRanking={ changePetRanking }/>
@@ -44,7 +48,7 @@ class Petlist extends Component {
     this.state = { selectedRanking: ''}
   }
   handleRanking = (event, key) => {
-    const { changePetRanking } = this.props;
+    const { changePetRanking} = this.props;
     let data = this.props.pets;
     data[key].ranking = Number(event.target.value);
     firebase.auth.onAuthStateChanged((user)=> {
@@ -70,7 +74,7 @@ class Petlist extends Component {
         <h2 id="pet-list-header">List of your pets </h2>
         <div className="card-deck">
         {pets ?
-        Object.keys(pets).map((key,index) =>
+        Object.keys(pets).sort((a,b)=>a.selectedRanking-b.selectedRanking).map((key,index) =>
           <div className="card" style={{ maxWidth: "300px", minWidth: "300px"}} key={pets[key].petname + key}>
       <img className="card-img-top" style={{height:"300px"}} src={pets[key].img} alt={`image of ${pets[key].petname}`}/>
       <div className="card-body">
@@ -82,13 +86,13 @@ class Petlist extends Component {
             <h5 className="card-title">{pets[key].petname}</h5>
           </div>
           <div className="col-6">
-            {/* <h6 style={{display:'inline'}}>Re-order</h6>
+            <h6 style={{display:'inline'}}>Re-order</h6>
               <select value={Number(pets[key].ranking)} onChange={(event) => this.handleRanking(event, key)}>
                 { Object.keys(pets).map((key,index) =>
                     <option value={Number(index+1)} key={key + index}>{Number(index+1)}</option>
                   )
                 }
-              </select> */}
+              </select>
             {/* {<button className="btn btn-warning btn-sm" style={{float:'right'}} onClick={reOrder(1)}>Submit</button>} */}
           </div>
       </div>

@@ -11,11 +11,12 @@ export const doCreateUser = (id, username, email) =>
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-export const addPetprofile = (id, petname, dob, img) =>
+export const addPetprofile = (id, petname, dob, img, ranking) =>
   db.ref(`users/${id}/pets`).push({
     petname,
     dob,
     img,
+    ranking
   });
 
 export const yourPets = (id) =>
