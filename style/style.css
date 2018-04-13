@@ -134,11 +134,25 @@ div.ReactModal__Content.ReactModal__Content--after-open {
 
 /* Your Pets Page */
 
-#pet-list-header {
-  text-align:center;
-  margin: 20px 0;
+#pet-list-body {
+  background-color: palevioletred;
 }
 
+#pet-list-header {
+  text-align:center;
+  margin:0;
+  padding: 20px;
+  background-color: palevioletred;
+}
+
+.card-deck {
+  width: 90%;
+  margin: auto;
+}
+
+.card-img-top {
+  max-height: 250px;
+}
 
 /* Edit Pet Profile CSS */
 

@@ -70,7 +70,7 @@ class Petlist extends Component {
 
 
     return(
-      <div>
+      <div id="pet-list-body">
         <h2 id="pet-list-header">List of your pets </h2>
         <div className="card-deck">
         {pets ?
