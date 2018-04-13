@@ -85,7 +85,8 @@ class Petlist extends Component {
             Pet # {index+1}
             <h5 className="card-title">{pets[key].petname}</h5>
           </div>
-          <div className="col-6">
+
+          {/* <div className="col-6">
             <h6 style={{display:'inline'}}>Re-order</h6>
               <select value={Number(pets[key].ranking)} onChange={(event) => this.handleRanking(event, key)}>
                 { Object.keys(pets).map((key,index) =>
@@ -93,8 +94,7 @@ class Petlist extends Component {
                   )
                 }
               </select>
-            {/* {<button className="btn btn-warning btn-sm" style={{float:'right'}} onClick={reOrder(1)}>Submit</button>} */}
-          </div>
+          </div> */}
       </div>
         <p className="card-text">Age: {calculateAge(pets[key].dob)}</p>
         <p className="card-text">Date of Birth: {pets[key].dob}</p>
