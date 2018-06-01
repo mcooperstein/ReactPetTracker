@@ -72,41 +72,41 @@ class Petlist extends Component {
     return(
       <div id="pet-list-body">
         <h2 id="pet-list-header">List of your pets </h2>
-        <div className="card-deck">
         {pets ?
         Object.keys(pets).sort((a,b)=>a.selectedRanking-b.selectedRanking).map((key,index) =>
-          <div className="card" style={{ maxWidth: "300px", minWidth: "300px"}} key={pets[key].petname + key}>
-      <img className="card-img-top" style={{height:"300px"}} src={pets[key].img} alt={`image of ${pets[key].petname}`}/>
-      <div className="card-body">
-        {/* Pet # {index+1}
-        <h5 className="card-title">{pets[key].petname}</h5> */}
-        <div className="row">
-          <div className="col-6">
-            Pet # {index+1}
-            <h5 className="card-title">{pets[key].petname}</h5>
-          </div>
+          <div className="card-deck">
+            <div className="card" style={{ maxWidth: "300px", minWidth: "300px"}} key={pets[key].petname + key}>
+                <img className="card-img-top" style={{height:"300px"}} src={pets[key].img} alt={`image of ${pets[key].petname}`}/>
+                <div className="card-body">
+                  {/* Pet # {index+1}
+                  <h5 className="card-title">{pets[key].petname}</h5> */}
+                  <div className="row">
+                    <div className="col-6">
+                      Pet # {index+1}
+                      <h5 className="card-title">{pets[key].petname}</h5>
+                    </div>
 
-          {/* <div className="col-6">
-            <h6 style={{display:'inline'}}>Re-order</h6>
-              <select value={Number(pets[key].ranking)} onChange={(event) => this.handleRanking(event, key)}>
-                { Object.keys(pets).map((key,index) =>
-                    <option value={Number(index+1)} key={key + index}>{Number(index+1)}</option>
-                  )
-                }
-              </select>
-          </div> */}
-      </div>
-        <p className="card-text">Age: {calculateAge(pets[key].dob)}</p>
-        <p className="card-text">Date of Birth: {pets[key].dob}</p>
-        <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
-        <Link className="btn btn-success" to={`/edit-pet-profile/${key}`}>Edit Profile</Link>
-      </div>
-    </div>) : <div>No pets :(</div> }
-        </div>
-      </div>
-    );
+                    {/* <div className="col-6">
+                      <h6 style={{display:'inline'}}>Re-order</h6>
+                        <select value={Number(pets[key].ranking)} onChange={(event) => this.handleRanking(event, key)}>
+                          { Object.keys(pets).map((key,index) =>
+                              <option value={Number(index+1)} key={key + index}>{Number(index+1)}</option>
+                            )
+                          }
+                        </select>
+                    </div> */}
+                </div>
+                  <p className="card-text">Age: {calculateAge(pets[key].dob)}</p>
+                  <p className="card-text">Date of Birth: {pets[key].dob}</p>
+                  <Link className="btn btn-primary" to={`/pets/${key}`}>{pets[key].petname} Profile</Link>
+                  <Link className="btn btn-success" to={`/edit-pet-profile/${key}`}>Edit Profile</Link>
+                </div>
+              </div>
+            </div>) : <div style={{textAlign: 'center'}}>You currently have no pets to keep track of :(</div> }
+          </div>
+      );
+    }
   }
-}
 
 function reOrder(position){
   console.log(position)
